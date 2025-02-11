@@ -1,6 +1,6 @@
 using Financr.GroceriesShoppingContext.Domain.Entities;
 
-namespace Financr.GroceriesShoppingContext.Domain.Tests;
+namespace Financr.GroceriesShoppingContext.Domain.Tests.Entities;
 
 public class CategoryTests
 {
