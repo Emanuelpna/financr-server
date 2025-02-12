@@ -1,3 +1,5 @@
+using Financr.GroceriesShoppingContext.Domain.Validators;
+
 namespace Financr.GroceriesShoppingContext.Domain.Entities;
 
 public abstract class Entity
