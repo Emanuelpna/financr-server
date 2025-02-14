@@ -7,6 +7,7 @@ public interface IGroceryRepository
 {
     Task<Grocery?> GetGroceryById(Guid groceryId);
     Task<Grocery?> GetGroceryByName(string groceryName);
+    Task<Grocery?> GetGroceryByCode(string groceryCode);
     Task<IEnumerable<Grocery>> ListGroceries();
 
     Task<Grocery?> CreateGrocery(Grocery grocery);

@@ -10,6 +10,8 @@ public class MockGroceryRepository : IGroceryRepository
     
     public string ExistingGroceryName { get; } = "Grocery Name";
     
+    public string ExistingGroceryCode { get; } = "12345";
+    
     public Task<Grocery?> GetGroceryById(Guid groceryId)
     {
         if (groceryId != ExistingGroceryId)
@@ -26,6 +28,16 @@ public class MockGroceryRepository : IGroceryRepository
             return Task.FromResult<Grocery?>(null);
                 
         var grocery = new Grocery("12345", ExistingGroceryName, 1, 1, EGroceryUnitType.Un);
+
+        return Task.FromResult<Grocery?>(grocery);
+    }
+
+    public Task<Grocery?> GetGroceryByCode(string groceryCode)
+    {
+        if (groceryCode != ExistingGroceryCode)
+            return Task.FromResult<Grocery?>(null);
+                
+        var grocery = new Grocery("12345", ExistingGroceryCode, 1, 1, EGroceryUnitType.Un);
 
         return Task.FromResult<Grocery?>(grocery);
     }
