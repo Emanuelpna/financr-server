@@ -1,10 +1,20 @@
+using Financr.GroceriesShoppingContext.Domain.Aggregates.GroceryAggregate;
 using Financr.GroceriesShoppingContext.Domain.Validators;
 
 namespace Financr.GroceriesShoppingContext.Domain.Entities;
 
 public class Purchase : Entity, IValidator<DomainErrorValidation>
 {
-    public List<DomainErrorValidation> Errors { get; set; }
+    public List<DomainErrorValidation> Errors { get; set; } = [];
+   
+    public Purchase(Guid id, DateTimeOffset purchaseDate, string supermarketName, string nfeAccessKey, decimal totalAmount) : base()
+    {
+        Id = id;
+        PurchaseDate = purchaseDate;
+        SupermarketName = supermarketName;
+        NfeAccessKey = nfeAccessKey;
+        TotalAmount = totalAmount;
+    }
     
     public Purchase(DateTimeOffset purchaseDate, string supermarketName, string nfeAccessKey, decimal totalAmount) : base()
     {
@@ -44,14 +54,16 @@ public class Purchase : Entity, IValidator<DomainErrorValidation>
         Groceries.Add(grocery);
     }
 
-    public void SetGroceries(IList<Grocery> groceries)
+    public int SetGroceries(IList<Grocery> groceries)
     {
-        if (groceries.Count != Groceries.DistinctBy(grocery => grocery.Code).Count())
-        {
-            Errors.Add(new DomainErrorValidation(nameof(Purchase), "Não é possível adicionar produto repetido a uma compra"));
-            return;
-        }
+        var groceriesInitialCount = Groceries.Count;
         
-        Groceries = groceries;
+        foreach (var grocery in groceries)
+        {
+            if(!Groceries.Any(x => x.Code.Equals(grocery.Code)))
+                Groceries.Add(grocery);
+        }
+
+        return Groceries.Count - groceriesInitialCount;
     }
 }

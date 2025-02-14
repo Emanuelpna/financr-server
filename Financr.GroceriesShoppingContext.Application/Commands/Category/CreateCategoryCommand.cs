@@ -3,7 +3,7 @@ using Financr.GroceriesShoppingContext.Domain.Validators;
 
 namespace Financr.GroceriesShoppingContext.Application.Commands.Category;
 
-public sealed record CreateCategoryCommand(string Name) : ICommand
+public sealed record CreateCategoryCommand(string Name) : ICommand<CreateCategoryCommandResponse>
 {
     public List<CommandErrorValidation> Errors { get; set; } = [];
     

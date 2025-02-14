@@ -10,9 +10,9 @@ public class CreateGroceryCommandTests
     {
         const string code = "12345";
         const string name = "Nome";
-        const decimal amount = 158.53M;
+        const decimal amount = 1;
         const EGroceryUnitType unitType = EGroceryUnitType.Un;
-        const decimal quantity = 2;
+        const decimal quantity = 1;
         
         var sut = new CreateGroceryCommand(code, name, amount, unitType, quantity);
         sut.Validate();
@@ -25,7 +25,7 @@ public class CreateGroceryCommandTests
     {
         const string code = "12345";
         const string name = "Nome";
-        const decimal amount = 158.53M;
+        const decimal amount = 1;
         const EGroceryUnitType unitType = EGroceryUnitType.Un;
         const decimal quantity = 0;
         
@@ -42,9 +42,9 @@ public class CreateGroceryCommandTests
     {
         const string code = "";
         const string name = "Nome";
-        const decimal amount = 158.53M;
+        const decimal amount = 1;
         const EGroceryUnitType unitType = EGroceryUnitType.Un;
-        const decimal quantity = 2;
+        const decimal quantity = 1;
         
         var sut = new CreateGroceryCommand(code, name, amount, unitType, quantity);
         sut.Validate();
@@ -59,9 +59,9 @@ public class CreateGroceryCommandTests
     {
         const string code = "12345";
         const string name = "";
-        const decimal amount = 158.53M;
+        const decimal amount = 1;
         const EGroceryUnitType unitType = EGroceryUnitType.Un;
-        const decimal quantity = 2;
+        const decimal quantity = 1;
         
         var sut = new CreateGroceryCommand(code, name, amount, unitType, quantity);
         sut.Validate();
@@ -78,7 +78,7 @@ public class CreateGroceryCommandTests
         const string name = "Nome";
         const decimal amount = 0;
         const EGroceryUnitType unitType = EGroceryUnitType.Un;
-        const decimal quantity = 2;
+        const decimal quantity = 1;
         
         var sut = new CreateGroceryCommand(code, name, amount, unitType, quantity);
         sut.Validate();
@@ -93,9 +93,9 @@ public class CreateGroceryCommandTests
     {
         const string code = "12345";
         const string name = "Name";
-        const decimal amount = 158.53M;
+        const decimal amount = 1;
         const EGroceryUnitType unitType = (EGroceryUnitType)3;
-        const decimal quantity = 2;
+        const decimal quantity = 1;
      
         var purchaseId = Guid.NewGuid();
         
@@ -112,7 +112,7 @@ public class CreateGroceryCommandTests
     {
         const string code = "12345";
         const string name = "Nome";
-        const decimal amount = 158.53M;
+        const decimal amount = 1;
         const EGroceryUnitType unitType = EGroceryUnitType.Un;
         const decimal quantity = 0;
         

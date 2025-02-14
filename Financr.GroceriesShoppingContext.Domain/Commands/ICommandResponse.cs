@@ -2,7 +2,7 @@ using Financr.GroceriesShoppingContext.Domain.Validators;
 
 namespace Financr.GroceriesShoppingContext.Domain.Commands;
 
-public interface ICommand<T> where T : ICommandResponse
+public interface ICommandResponse
 {
-    void Validate();
+  
 }

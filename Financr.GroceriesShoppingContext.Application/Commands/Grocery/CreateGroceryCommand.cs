@@ -10,7 +10,7 @@ public sealed record CreateGroceryCommand(
     decimal Amount,
     EGroceryUnitType UnitType,
     decimal Quantity
-) :  ICommand, IValidator<CommandErrorValidation>
+) :  ICommand<CreateGroceryCommandResponse>, IValidator<CommandErrorValidation>
 {
     public List<CommandErrorValidation> Errors { get; set; } = [];
     
@@ -31,6 +31,4 @@ public sealed record CreateGroceryCommand(
         if (Quantity <= 0)
             Errors.Add(new CommandErrorValidation(nameof(Quantity), "Quantidade do Produto deve ser maior que zero"));
     }
-
-    
 }
