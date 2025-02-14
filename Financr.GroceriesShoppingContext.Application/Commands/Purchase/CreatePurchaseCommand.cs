@@ -8,9 +8,9 @@ public sealed record CreatePurchaseCommand(
     string SupermarketName,
     string NfeAccessKey,
     decimal TotalAmount
-): ICommand<CreatePurchaseCommandResponse>
+): ICommand<CreatePurchaseCommandResponse>, IValidator<CommandErrorValidation>
 {
-    public List<CommandErrorValidation> Errors { get; set; } = [];
+    public List<CommandErrorValidation> Errors { get; } = [];
     
     public void Validate()
     {

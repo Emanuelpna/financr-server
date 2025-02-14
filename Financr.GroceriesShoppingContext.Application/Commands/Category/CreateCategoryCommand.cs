@@ -3,9 +3,9 @@ using Financr.GroceriesShoppingContext.Domain.Validators;
 
 namespace Financr.GroceriesShoppingContext.Application.Commands.Category;
 
-public sealed record CreateCategoryCommand(string Name) : ICommand<CreateCategoryCommandResponse>
+public sealed record CreateCategoryCommand(string Name) : ICommand<CreateCategoryCommandResponse>, IValidator<CommandErrorValidation>
 {
-    public List<CommandErrorValidation> Errors { get; set; } = [];
+    public List<CommandErrorValidation> Errors { get; } = [];
     
     public void Validate()
     {

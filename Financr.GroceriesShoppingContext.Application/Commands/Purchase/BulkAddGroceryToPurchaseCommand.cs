@@ -7,9 +7,9 @@ namespace Financr.GroceriesShoppingContext.Application.Commands.Purchase;
 public sealed record BulkAddGroceryToPurchaseCommand(
     Guid PurchaseId,
     IList<BulkAddGroceryToPurchaseCommandItem> Groceries
-) : ICommand<BulkAddGroceryToPurchaseCommandResponse>
+) : ICommand<BulkAddGroceryToPurchaseCommandResponse>, IValidator<CommandErrorValidation>
 {
-    public List<CommandErrorValidation> Errors { get; set; } = [];
+    public List<CommandErrorValidation> Errors { get; } = [];
     
     public void Validate()
     {

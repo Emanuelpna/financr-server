@@ -12,7 +12,7 @@ public sealed record CreateGroceryCommand(
     decimal Quantity
 ) :  ICommand<CreateGroceryCommandResponse>, IValidator<CommandErrorValidation>
 {
-    public List<CommandErrorValidation> Errors { get; set; } = [];
+    public List<CommandErrorValidation> Errors { get; } = [];
     
     public void Validate()
     {

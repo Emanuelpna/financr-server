@@ -11,9 +11,9 @@ public sealed record AddGroceryToPurchaseCommand(
     decimal Amount,
     EGroceryUnitType UnitType,
     decimal Quantity
-) : ICommand<AddGroceryToPurchaseCommandResponse>
+) : ICommand<AddGroceryToPurchaseCommandResponse>, IValidator<CommandErrorValidation>
 {
-    public List<CommandErrorValidation> Errors { get; set; } = [];
+    public List<CommandErrorValidation> Errors { get; } = [];
     
     public void Validate()
     {
