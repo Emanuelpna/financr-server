@@ -14,10 +14,10 @@ public class CreateGroceryCommandTests
         const EGroceryUnitType unitType = EGroceryUnitType.Un;
         const decimal quantity = 1;
         
-        var sut = new CreateGroceryCommand(code, name, amount, unitType, quantity);
-        sut.Validate();
+        var command = new CreateGroceryCommand(code, name, amount, unitType, quantity);
+        command.Validate();
         
-        Assert.Empty(sut.Errors);
+        Assert.Empty(command.Errors);
     }
     
     [Fact]
@@ -29,12 +29,12 @@ public class CreateGroceryCommandTests
         const EGroceryUnitType unitType = EGroceryUnitType.Un;
         const decimal quantity = 0;
         
-        var sut = new CreateGroceryCommand(code, name, amount, unitType, quantity);
-        sut.Validate();
+        var command = new CreateGroceryCommand(code, name, amount, unitType, quantity);
+        command.Validate();
         
-        Assert.True(sut.Errors.Count == 1);
+        Assert.True(command.Errors.Count == 1);
         
-        Assert.Equal("Quantity", sut.Errors[0].Field);
+        Assert.Contains(command.Errors, x => x.Field.Equals("Quantity"));
     }
     
     [Fact]
@@ -46,12 +46,12 @@ public class CreateGroceryCommandTests
         const EGroceryUnitType unitType = EGroceryUnitType.Un;
         const decimal quantity = 1;
         
-        var sut = new CreateGroceryCommand(code, name, amount, unitType, quantity);
-        sut.Validate();
+        var command = new CreateGroceryCommand(code, name, amount, unitType, quantity);
+        command.Validate();
         
-        Assert.True(sut.Errors.Count == 1);
+        Assert.True(command.Errors.Count == 1);
         
-        Assert.Equal("Code", sut.Errors[0].Field);
+        Assert.Contains(command.Errors, x => x.Field.Equals("Code"));
     }
     
     [Fact]
@@ -63,12 +63,12 @@ public class CreateGroceryCommandTests
         const EGroceryUnitType unitType = EGroceryUnitType.Un;
         const decimal quantity = 1;
         
-        var sut = new CreateGroceryCommand(code, name, amount, unitType, quantity);
-        sut.Validate();
+        var command = new CreateGroceryCommand(code, name, amount, unitType, quantity);
+        command.Validate();
         
-        Assert.True(sut.Errors.Count == 1);
+        Assert.True(command.Errors.Count == 1);
         
-        Assert.Equal("Name", sut.Errors[0].Field);
+        Assert.Contains(command.Errors, x => x.Field.Equals("Name"));
     }
     
     [Fact]
@@ -80,12 +80,12 @@ public class CreateGroceryCommandTests
         const EGroceryUnitType unitType = EGroceryUnitType.Un;
         const decimal quantity = 1;
         
-        var sut = new CreateGroceryCommand(code, name, amount, unitType, quantity);
-        sut.Validate();
+        var command = new CreateGroceryCommand(code, name, amount, unitType, quantity);
+        command.Validate();
         
-        Assert.True(sut.Errors.Count == 1);
+        Assert.True(command.Errors.Count == 1);
         
-        Assert.Equal("Amount", sut.Errors[0].Field);
+        Assert.Contains(command.Errors, x => x.Field.Equals("Amount"));
     }
     
     [Fact]
@@ -96,15 +96,13 @@ public class CreateGroceryCommandTests
         const decimal amount = 1;
         const EGroceryUnitType unitType = (EGroceryUnitType)3;
         const decimal quantity = 1;
-     
-        var purchaseId = Guid.NewGuid();
         
-        var sut = new CreateGroceryCommand(code, name, amount, unitType, quantity);
-        sut.Validate();
+        var command = new CreateGroceryCommand(code, name, amount, unitType, quantity);
+        command.Validate();
         
-        Assert.True(sut.Errors.Count == 1);
+        Assert.True(command.Errors.Count == 1);
         
-        Assert.Equal("UnitType", sut.Errors[0].Field);
+        Assert.Contains(command.Errors, x => x.Field.Equals("UnitType"));
     }
     
     [Fact]
@@ -116,11 +114,11 @@ public class CreateGroceryCommandTests
         const EGroceryUnitType unitType = EGroceryUnitType.Un;
         const decimal quantity = 0;
         
-        var sut = new CreateGroceryCommand(code, name, amount, unitType, quantity);
-        sut.Validate();
+        var command = new CreateGroceryCommand(code, name, amount, unitType, quantity);
+        command.Validate();
         
-        Assert.True(sut.Errors.Count == 1);
+        Assert.True(command.Errors.Count == 1);
         
-        Assert.Equal("Quantity", sut.Errors[0].Field);
+        Assert.Contains(command.Errors, x => x.Field.Equals("Quantity"));
     }
 }

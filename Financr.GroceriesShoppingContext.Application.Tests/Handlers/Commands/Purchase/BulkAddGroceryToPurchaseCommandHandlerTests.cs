@@ -38,9 +38,7 @@ public class BulkAddGroceryToPurchaseCommandHandlerTests
             
         var commandHandler = new BulkAddGroceryToPurchaseCommandHandler(repository);
 
-        var groceries = new List<BulkAddGroceryToPurchaseCommandItem>
-        {
-        };
+        var groceries = new List<BulkAddGroceryToPurchaseCommandItem>();
         
         var command = new BulkAddGroceryToPurchaseCommand(repository.ExistingPurchaseId, groceries);
             

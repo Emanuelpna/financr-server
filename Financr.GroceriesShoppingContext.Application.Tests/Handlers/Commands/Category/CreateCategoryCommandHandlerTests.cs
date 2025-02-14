@@ -13,9 +13,9 @@ public class CreateCategoryCommandHandlerTests
             
         var commandHandler = new CreateCategoryCommandHandler(repository);
 
-        const string CategoryName = "Category Name";
+        const string categoryName = "Category Name";
         
-        var command = new CreateCategoryCommand(CategoryName);
+        var command = new CreateCategoryCommand(categoryName);
             
         var result = await commandHandler.Handle(command, CancellationToken.None);
         
@@ -23,7 +23,7 @@ public class CreateCategoryCommandHandlerTests
         
         Assert.NotNull(result.Data);
         
-        Assert.Equal(CategoryName, result.Data.Name);
+        Assert.Equal(categoryName, result.Data.Name);
     }
     
     [Fact]

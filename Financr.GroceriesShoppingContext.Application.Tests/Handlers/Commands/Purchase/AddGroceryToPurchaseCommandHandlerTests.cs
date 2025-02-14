@@ -14,8 +14,14 @@ public class AddGroceryToPurchaseCommandHandlerTests
             
         var commandHandler = new AddGroceryToPurchaseCommandHandler(repository);
 
-        var command =
-            new AddGroceryToPurchaseCommand(repository.ExistingPurchaseId, "12345", "GroceryName", 1, EGroceryUnitType.Un, 1);
+        var command = new AddGroceryToPurchaseCommand(
+            repository.ExistingPurchaseId, 
+            "12345",
+            "GroceryName",
+            1,
+            EGroceryUnitType.Un, 
+            1
+        );
             
         var result = await commandHandler.Handle(command, CancellationToken.None);
         
@@ -33,8 +39,14 @@ public class AddGroceryToPurchaseCommandHandlerTests
             
         var commandHandler = new AddGroceryToPurchaseCommandHandler(repository);
 
-        var command =
-            new AddGroceryToPurchaseCommand(repository.ExistingPurchaseId, "12345", "GroceryName", 0, EGroceryUnitType.Un, 1);
+        var command = new AddGroceryToPurchaseCommand(
+            repository.ExistingPurchaseId, 
+            "12345",
+            "GroceryName",
+            0,
+            EGroceryUnitType.Un,
+            1
+        );
             
         var result = await commandHandler.Handle(command, CancellationToken.None);
         
@@ -54,7 +66,14 @@ public class AddGroceryToPurchaseCommandHandlerTests
         var commandHandler = new AddGroceryToPurchaseCommandHandler(repository);
 
         var command =
-            new AddGroceryToPurchaseCommand(Guid.NewGuid(), "12345", "GroceryName", 1, EGroceryUnitType.Un, 1);
+            new AddGroceryToPurchaseCommand(
+                Guid.NewGuid(),
+                "12345", 
+                "GroceryName",
+                1, 
+                EGroceryUnitType.Un,
+                1
+            );
             
         var result = await commandHandler.Handle(command, CancellationToken.None);
         

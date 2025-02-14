@@ -16,10 +16,10 @@ public class AddGroceryToPurchaseCommandTests
      
         var purchaseId = Guid.NewGuid();
         
-        var sut = new AddGroceryToPurchaseCommand(purchaseId, code, name, amount, unitType, quantity);
-        sut.Validate();
+        var command = new AddGroceryToPurchaseCommand(purchaseId, code, name, amount, unitType, quantity);
+        command.Validate();
         
-        Assert.Empty(sut.Errors);
+        Assert.Empty(command.Errors);
     }
     
     [Fact]
@@ -33,12 +33,12 @@ public class AddGroceryToPurchaseCommandTests
      
         var purchaseId = Guid.Empty;
         
-        var sut = new AddGroceryToPurchaseCommand(purchaseId, code, name, amount, unitType, quantity);
-        sut.Validate();
+        var command = new AddGroceryToPurchaseCommand(purchaseId, code, name, amount, unitType, quantity);
+        command.Validate();
         
-        Assert.True(sut.Errors.Count == 1);
+        Assert.True(command.Errors.Count == 1);
         
-        Assert.Equal("PurchaseId", sut.Errors[0].Field);
+        Assert.Contains(command.Errors, x => x.Field.Equals("PurchaseId"));
     }
     
     [Fact]
@@ -52,12 +52,12 @@ public class AddGroceryToPurchaseCommandTests
      
         var purchaseId = Guid.NewGuid();
         
-        var sut = new AddGroceryToPurchaseCommand(purchaseId, code, name, amount, unitType, quantity);
-        sut.Validate();
+        var command = new AddGroceryToPurchaseCommand(purchaseId, code, name, amount, unitType, quantity);
+        command.Validate();
         
-        Assert.True(sut.Errors.Count == 1);
+        Assert.True(command.Errors.Count == 1);
         
-        Assert.Equal("Code", sut.Errors[0].Field);
+        Assert.Contains(command.Errors, x => x.Field.Equals("Code"));
     }
     
     [Fact]
@@ -71,12 +71,12 @@ public class AddGroceryToPurchaseCommandTests
      
         var purchaseId = Guid.NewGuid();
         
-        var sut = new AddGroceryToPurchaseCommand(purchaseId, code, name, amount, unitType, quantity);
-        sut.Validate();
+        var command = new AddGroceryToPurchaseCommand(purchaseId, code, name, amount, unitType, quantity);
+        command.Validate();
         
-        Assert.True(sut.Errors.Count == 1);
+        Assert.True(command.Errors.Count == 1);
         
-        Assert.Equal("Name", sut.Errors[0].Field);
+        Assert.Contains(command.Errors, x => x.Field.Equals("Name"));
     }
     
     [Fact]
@@ -90,12 +90,12 @@ public class AddGroceryToPurchaseCommandTests
      
         var purchaseId = Guid.NewGuid();
         
-        var sut = new AddGroceryToPurchaseCommand(purchaseId, code, name, amount, unitType, quantity);
-        sut.Validate();
+        var command = new AddGroceryToPurchaseCommand(purchaseId, code, name, amount, unitType, quantity);
+        command.Validate();
         
-        Assert.True(sut.Errors.Count == 1);
+        Assert.True(command.Errors.Count == 1);
         
-        Assert.Equal("Amount", sut.Errors[0].Field);
+        Assert.Contains(command.Errors, x => x.Field.Equals("Amount"));
     }
     
     [Fact]
@@ -109,12 +109,12 @@ public class AddGroceryToPurchaseCommandTests
      
         var purchaseId = Guid.NewGuid();
         
-        var sut = new AddGroceryToPurchaseCommand(purchaseId, code, name, amount, unitType, quantity);
-        sut.Validate();
+        var command = new AddGroceryToPurchaseCommand(purchaseId, code, name, amount, unitType, quantity);
+        command.Validate();
         
-        Assert.True(sut.Errors.Count == 1);
+        Assert.True(command.Errors.Count == 1);
         
-        Assert.Equal("UnitType", sut.Errors[0].Field);
+        Assert.Contains(command.Errors, x => x.Field.Equals("UnitType"));
     }
     
     [Fact]
@@ -128,11 +128,11 @@ public class AddGroceryToPurchaseCommandTests
      
         var purchaseId = Guid.NewGuid();
         
-        var sut = new AddGroceryToPurchaseCommand(purchaseId, code, name, amount, unitType, quantity);
-        sut.Validate();
+        var command = new AddGroceryToPurchaseCommand(purchaseId, code, name, amount, unitType, quantity);
+        command.Validate();
         
-        Assert.True(sut.Errors.Count == 1);
+        Assert.True(command.Errors.Count == 1);
         
-        Assert.Equal("Quantity", sut.Errors[0].Field);
+        Assert.Contains(command.Errors, x => x.Field.Equals("Quantity"));
     }
 }

@@ -14,10 +14,10 @@ public class CreatePurchaseCommandHandlerTests
             
         var commandHandler = new CreatePurchaseCommandHandler(repository);
 
-        const string SupermarketName = "Supermarket Name";
+        const string supermarketName = "Supermarket Name";
         
         var command = 
-            new CreatePurchaseCommand(DateTimeOffset.UtcNow, SupermarketName, "123456", 1);
+            new CreatePurchaseCommand(DateTimeOffset.UtcNow, supermarketName, "123456", 1);
             
         var result = await commandHandler.Handle(command, CancellationToken.None);
         
@@ -35,8 +35,12 @@ public class CreatePurchaseCommandHandlerTests
             
         var commandHandler = new CreatePurchaseCommandHandler(repository);
         
-        var command = 
-            new CreatePurchaseCommand(DateTimeOffset.UtcNow, "Supermarket Name", "123456", 0);
+        var command = new CreatePurchaseCommand(
+            DateTimeOffset.UtcNow,
+            "Supermarket Name",
+            "123456",
+            0
+        );
             
         var result = await commandHandler.Handle(command, CancellationToken.None);
         

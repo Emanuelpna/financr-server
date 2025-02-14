@@ -9,10 +9,10 @@ public class CreateCategoryCommandTests
     {
         const string categoryName = "Category Name";
         
-        var sut = new CreateCategoryCommand(categoryName);
-        sut.Validate();
+        var command = new CreateCategoryCommand(categoryName);
+        command.Validate();
         
-        Assert.Equal(categoryName, sut.Name);
+        Assert.Equal(categoryName, command.Name);
     }
     
     [Fact]
@@ -20,11 +20,11 @@ public class CreateCategoryCommandTests
     {
         const string categoryName = "";
         
-        var sut = new CreateCategoryCommand(categoryName);
-        sut.Validate();
+        var command = new CreateCategoryCommand(categoryName);
+        command.Validate();
         
-        Assert.True(sut.Errors.Count == 1);
+        Assert.True(command.Errors.Count == 1);
         
-        Assert.Equal("Name", sut.Errors[0].Field);
+        Assert.Contains(command.Errors, x => x.Field.Equals("Name"));
     }
 }
