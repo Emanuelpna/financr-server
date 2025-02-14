@@ -11,11 +11,11 @@ public class GetCategoryByNameQueryHandlerTests
     {
         var repository = new MockCategoryRepository();
             
-        var commandHandler = new GetCategoryByNameQueryHandler(repository);
+        var queryHandler = new GetCategoryByNameQueryHandler(repository);
         
-        var command = new GetCategoryByNameQuery(repository.ExistingCategoryName);
+        var query = new GetCategoryByNameQuery(repository.ExistingCategoryName);
             
-        var result = await commandHandler.Handle(command, CancellationToken.None);
+        var result = await queryHandler.Handle(query, CancellationToken.None);
         
         Assert.Null(result.Errors);
         
@@ -25,15 +25,15 @@ public class GetCategoryByNameQueryHandlerTests
     }
     
     [Fact]
-    public async Task Test_ShouldNotGetCategoryByNameWithInvalidCommandData()
+    public async Task Test_ShouldNotGetCategoryByNameWithInvalidQueryData()
     {
         var repository = new MockCategoryRepository();
             
-        var commandHandler = new GetCategoryByNameQueryHandler(repository);
+        var queryHandler = new GetCategoryByNameQueryHandler(repository);
         
-        var command = new GetCategoryByNameQuery(string.Empty);
+        var query = new GetCategoryByNameQuery(string.Empty);
             
-        var result = await commandHandler.Handle(command, CancellationToken.None);
+        var result = await queryHandler.Handle(query, CancellationToken.None);
         
         Assert.NotNull(result.Errors);
         

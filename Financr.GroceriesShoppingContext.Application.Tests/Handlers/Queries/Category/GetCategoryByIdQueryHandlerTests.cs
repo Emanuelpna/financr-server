@@ -11,11 +11,11 @@ public class GetCategoryByIdQueryHandlerTests
     {
         var repository = new MockCategoryRepository();
             
-        var commandHandler = new GetCategoryByIdQueryHandler(repository);
+        var queryHandler = new GetCategoryByIdQueryHandler(repository);
         
-        var command = new GetCategoryByIdQuery(repository.ExistingCategoryId);
+        var query = new GetCategoryByIdQuery(repository.ExistingCategoryId);
             
-        var result = await commandHandler.Handle(command, CancellationToken.None);
+        var result = await queryHandler.Handle(query, CancellationToken.None);
         
         Assert.Null(result.Errors);
         
@@ -25,15 +25,15 @@ public class GetCategoryByIdQueryHandlerTests
     }
     
     [Fact]
-    public async Task Test_ShouldNotGetCategoryByIdWithInvalidCommandData()
+    public async Task Test_ShouldNotGetCategoryByIdWithInvalidQueryData()
     {
         var repository = new MockCategoryRepository();
             
-        var commandHandler = new GetCategoryByIdQueryHandler(repository);
+        var queryHandler = new GetCategoryByIdQueryHandler(repository);
         
-        var command = new GetCategoryByIdQuery(Guid.Empty);
+        var query = new GetCategoryByIdQuery(Guid.Empty);
             
-        var result = await commandHandler.Handle(command, CancellationToken.None);
+        var result = await queryHandler.Handle(query, CancellationToken.None);
         
         Assert.NotNull(result.Errors);
         

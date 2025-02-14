@@ -11,11 +11,11 @@ public class ListCategoriesQueryHandlerTests
     {
         var repository = new MockCategoryRepository();
             
-        var commandHandler = new ListCategoriesQueryHandler(repository);
+        var queryHandler = new ListCategoriesQueryHandler(repository);
         
-        var command = new ListCategoriesQuery();
+        var query = new ListCategoriesQuery();
             
-        var result = await commandHandler.Handle(command, CancellationToken.None);
+        var result = await queryHandler.Handle(query, CancellationToken.None);
         
         Assert.Null(result.Errors);
         
