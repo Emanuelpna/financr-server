@@ -3,9 +3,9 @@ using Financr.GroceriesShoppingContext.Domain.Validators;
 
 namespace Financr.GroceriesShoppingContext.Application.Queries.Grocery;
 
-public sealed record ListGroceriesQuery() : ICommand<ListGroceriesQueryResponse>, IValidator<DomainErrorValidation>
+public sealed record ListGroceriesQuery() : ICommand<ListGroceriesQueryResponse>, IValidator<CommandErrorValidation>
 {
-    public List<DomainErrorValidation> Errors { get; } = [];
+    public List<CommandErrorValidation> Errors { get; } = [];
     
     public void Validate()
     {
