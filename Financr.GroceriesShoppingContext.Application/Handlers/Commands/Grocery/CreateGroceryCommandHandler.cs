@@ -1,7 +1,7 @@
 using Financr.GroceriesShoppingContext.Application.Commands.Grocery;
 using Financr.GroceriesShoppingContext.Domain.Handlers;
 using Financr.GroceriesShoppingContext.Domain.Repositories;
-using Financr.GroceriesShoppingContext.Domain.Responses;
+using Financr.GroceriesShoppingContext.Domain.Abstractions;
 using Financr.GroceriesShoppingContext.Domain.Validators;
 
 namespace Financr.GroceriesShoppingContext.Application.Handlers.Commands.Grocery;

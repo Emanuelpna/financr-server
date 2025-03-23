@@ -1,3 +1,5 @@
+using Financr.GroceriesShoppingContext.Domain.Abstractions;
+
 namespace Financr.GroceriesShoppingContext.Domain.Entities;
 
 public class Category : Entity

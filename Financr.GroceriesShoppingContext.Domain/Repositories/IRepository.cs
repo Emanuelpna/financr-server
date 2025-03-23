@@ -1,4 +1,4 @@
-using Financr.GroceriesShoppingContext.Domain.Entities;
+using Financr.GroceriesShoppingContext.Domain.Abstractions;
 
 namespace Financr.GroceriesShoppingContext.Domain.Repositories;
 

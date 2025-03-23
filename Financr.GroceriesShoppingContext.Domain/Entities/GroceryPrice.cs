@@ -1,3 +1,4 @@
+using Financr.GroceriesShoppingContext.Domain.Abstractions;
 using Financr.GroceriesShoppingContext.Domain.ValueObjects;
 
 namespace Financr.GroceriesShoppingContext.Domain.Entities;
