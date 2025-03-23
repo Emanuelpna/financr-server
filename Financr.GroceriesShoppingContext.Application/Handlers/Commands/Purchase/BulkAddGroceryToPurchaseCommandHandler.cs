@@ -1,12 +1,12 @@
 using Financr.GroceriesShoppingContext.Application.Commands.Purchase;
-using Financr.GroceriesShoppingContext.Domain.Handlers;
 using Financr.GroceriesShoppingContext.Domain.Repositories;
 using Financr.GroceriesShoppingContext.Domain.Abstractions;
 using Financr.GroceriesShoppingContext.Domain.Validators;
+using MediatR;
 
 namespace Financr.GroceriesShoppingContext.Application.Handlers.Commands.Purchase;
 
-public sealed class BulkAddGroceryToPurchaseCommandHandler : ICommandHandler<BulkAddGroceryToPurchaseCommand, BulkAddGroceryToPurchaseCommandResponse>
+public sealed class BulkAddGroceryToPurchaseCommandHandler : IRequestHandler<BulkAddGroceryToPurchaseCommand, Result<BulkAddGroceryToPurchaseCommandResponse, CommandErrorValidation>>
 {
     private readonly IPurchaseRepository _repository;
 
@@ -20,12 +20,12 @@ public sealed class BulkAddGroceryToPurchaseCommandHandler : ICommandHandler<Bul
         command.Validate();
 
         if (command.Errors.Count > 0)
-            return new Result<BulkAddGroceryToPurchaseCommandResponse, CommandErrorValidation>(null, command.Errors);
+            return new Result<BulkAddGroceryToPurchaseCommandResponse, CommandErrorValidation>(command.Errors);
 
-        var purchase = await _repository.GetPurchaseById(command.PurchaseId);
+        var purchase = await _repository.GetPurchaseById(command.PurchaseId, cancellationToken);
         
         if(purchase is null)
-            return new Result<BulkAddGroceryToPurchaseCommandResponse, CommandErrorValidation>(null, new List<CommandErrorValidation>
+            return new Result<BulkAddGroceryToPurchaseCommandResponse, CommandErrorValidation>(new List<CommandErrorValidation>
             {
                 new(nameof(command.PurchaseId), "Compra não encontrada")
             });
@@ -45,12 +45,12 @@ public sealed class BulkAddGroceryToPurchaseCommandHandler : ICommandHandler<Bul
         var groceriesAdded = purchase.SetGroceries(groceries);
         
         if(purchase.Errors.Count > 0)
-            return new Result<BulkAddGroceryToPurchaseCommandResponse, CommandErrorValidation>(null, new List<CommandErrorValidation>
+            return new Result<BulkAddGroceryToPurchaseCommandResponse, CommandErrorValidation>(new List<CommandErrorValidation>
             {
                 new(nameof(command.Groceries), "Não é possível adicionar produtos repetidos a uma Compra")
             });
 
-        await _repository.BulkAddGrocery(purchase.Id, groceries);
+        await _repository.BulkAddGrocery(purchase.Id, groceries, cancellationToken);
 
         var response = new BulkAddGroceryToPurchaseCommandResponse(purchase.Id, groceriesAdded);
         

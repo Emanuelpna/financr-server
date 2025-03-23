@@ -1,9 +1,10 @@
+using Financr.GroceriesShoppingContext.Domain.Abstractions;
 using Financr.GroceriesShoppingContext.Domain.Commands;
 using Financr.GroceriesShoppingContext.Domain.Validators;
 
 namespace Financr.GroceriesShoppingContext.Application.Queries.Grocery;
 
-public sealed record GetGroceryByNameQuery(string Name) : ICommand<GetGroceryByNameQueryResponse>, IValidator<CommandErrorValidation>
+public sealed record GetGroceryByNameQuery(string Name) : ICommand<Result<GetGroceryByNameQueryResponse, CommandErrorValidation>>, IValidator<CommandErrorValidation>
 {
     public List<CommandErrorValidation> Errors { get; } = [];
     

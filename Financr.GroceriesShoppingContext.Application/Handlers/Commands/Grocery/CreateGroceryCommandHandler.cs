@@ -1,12 +1,12 @@
 using Financr.GroceriesShoppingContext.Application.Commands.Grocery;
-using Financr.GroceriesShoppingContext.Domain.Handlers;
 using Financr.GroceriesShoppingContext.Domain.Repositories;
 using Financr.GroceriesShoppingContext.Domain.Abstractions;
 using Financr.GroceriesShoppingContext.Domain.Validators;
+using MediatR;
 
 namespace Financr.GroceriesShoppingContext.Application.Handlers.Commands.Grocery;
 
-public sealed class CreateGroceryCommandHandler : ICommandHandler<CreateGroceryCommand, CreateGroceryCommandResponse>
+public sealed class CreateGroceryCommandHandler : IRequestHandler<CreateGroceryCommand, Result<CreateGroceryCommandResponse, CommandErrorValidation>>
 {
     private readonly IGroceryRepository _repository;
 
@@ -20,11 +20,11 @@ public sealed class CreateGroceryCommandHandler : ICommandHandler<CreateGroceryC
         command.Validate();
 
         if (command.Errors.Count > 0)
-            return new Result<CreateGroceryCommandResponse, CommandErrorValidation>(null, command.Errors);
+            return new Result<CreateGroceryCommandResponse, CommandErrorValidation>(command.Errors);
 
         var grocery = new Domain.Entities.Grocery(command.Code, command.Name, command.Amount, command.Quantity, command.UnitType);
         
-        await _repository.CreateGrocery(grocery);
+        await _repository.CreateGrocery(grocery, cancellationToken);
         
         var response = new CreateGroceryCommandResponse(grocery.Id);
         

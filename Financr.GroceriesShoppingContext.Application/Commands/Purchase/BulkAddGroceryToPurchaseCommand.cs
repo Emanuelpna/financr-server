@@ -1,3 +1,4 @@
+using Financr.GroceriesShoppingContext.Domain.Abstractions;
 using Financr.GroceriesShoppingContext.Domain.Commands;
 using Financr.GroceriesShoppingContext.Domain.Enums;
 using Financr.GroceriesShoppingContext.Domain.Validators;
@@ -7,7 +8,7 @@ namespace Financr.GroceriesShoppingContext.Application.Commands.Purchase;
 public sealed record BulkAddGroceryToPurchaseCommand(
     Guid PurchaseId,
     IList<BulkAddGroceryToPurchaseCommandItem> Groceries
-) : ICommand<BulkAddGroceryToPurchaseCommandResponse>, IValidator<CommandErrorValidation>
+) : ICommand<Result<BulkAddGroceryToPurchaseCommandResponse, CommandErrorValidation>>, IValidator<CommandErrorValidation>
 {
     public List<CommandErrorValidation> Errors { get; } = [];
     

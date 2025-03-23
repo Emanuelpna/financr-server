@@ -1,12 +1,12 @@
 using Financr.GroceriesShoppingContext.Application.Queries.Grocery;
-using Financr.GroceriesShoppingContext.Domain.Handlers;
 using Financr.GroceriesShoppingContext.Domain.Repositories;
 using Financr.GroceriesShoppingContext.Domain.Abstractions;
 using Financr.GroceriesShoppingContext.Domain.Validators;
+using MediatR;
 
 namespace Financr.GroceriesShoppingContext.Application.Handlers.Queries.Grocery;
 
-public sealed class GetGroceryByIdQueryHandler : ICommandHandler<GetGroceryByIdQuery, GetGroceryByIdQueryResponse>
+public sealed class GetGroceryByIdQueryHandler : IRequestHandler<GetGroceryByIdQuery, Result<GetGroceryByIdQueryResponse, CommandErrorValidation>>
 {
     private readonly IGroceryRepository _repository;
 
@@ -20,12 +20,12 @@ public sealed class GetGroceryByIdQueryHandler : ICommandHandler<GetGroceryByIdQ
         query.Validate();
 
         if (query.Errors.Count > 0)
-            return new Result<GetGroceryByIdQueryResponse, CommandErrorValidation>(null, query.Errors);
+            return new Result<GetGroceryByIdQueryResponse, CommandErrorValidation>(query.Errors);
 
-        var grocery = await _repository.GetGroceryById(query.GroceryId);
+        var grocery = await _repository.GetGroceryById(query.GroceryId, cancellationToken);
 
         if (grocery is null)
-            return new Result<GetGroceryByIdQueryResponse, CommandErrorValidation>(null,
+            return new Result<GetGroceryByIdQueryResponse, CommandErrorValidation>(
                 new List<CommandErrorValidation>
                 {
                     new (nameof(query.GroceryId), "Produto não encontrado")

@@ -1,3 +1,4 @@
+using Financr.GroceriesShoppingContext.Domain.Abstractions;
 using Financr.GroceriesShoppingContext.Domain.Commands;
 using Financr.GroceriesShoppingContext.Domain.Enums;
 using Financr.GroceriesShoppingContext.Domain.Validators;
@@ -11,7 +12,7 @@ public sealed record AddGroceryToPurchaseCommand(
     decimal Amount,
     EGroceryUnitType UnitType,
     decimal Quantity
-) : ICommand<AddGroceryToPurchaseCommandResponse>, IValidator<CommandErrorValidation>
+) : ICommand<Result<AddGroceryToPurchaseCommandResponse, CommandErrorValidation>>, IValidator<CommandErrorValidation>
 {
     public List<CommandErrorValidation> Errors { get; } = [];
     

@@ -1,3 +1,4 @@
+using Financr.GroceriesShoppingContext.Domain.Abstractions;
 using Financr.GroceriesShoppingContext.Domain.Commands;
 using Financr.GroceriesShoppingContext.Domain.Validators;
 
@@ -8,7 +9,7 @@ public sealed record CreatePurchaseCommand(
     string SupermarketName,
     string NfeAccessKey,
     decimal TotalAmount
-): ICommand<CreatePurchaseCommandResponse>, IValidator<CommandErrorValidation>
+): ICommand<Result<CreatePurchaseCommandResponse, CommandErrorValidation>>, IValidator<CommandErrorValidation>
 {
     public List<CommandErrorValidation> Errors { get; } = [];
     

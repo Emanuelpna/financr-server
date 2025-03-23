@@ -1,12 +1,12 @@
 using Financr.GroceriesShoppingContext.Application.Commands.Purchase;
-using Financr.GroceriesShoppingContext.Domain.Handlers;
 using Financr.GroceriesShoppingContext.Domain.Repositories;
 using Financr.GroceriesShoppingContext.Domain.Abstractions;
 using Financr.GroceriesShoppingContext.Domain.Validators;
+using MediatR;
 
 namespace Financr.GroceriesShoppingContext.Application.Handlers.Commands.Purchase;
 
-public sealed class AddGroceryToPurchaseCommandHandler : ICommandHandler<AddGroceryToPurchaseCommand, AddGroceryToPurchaseCommandResponse>
+public sealed class AddGroceryToPurchaseCommandHandler : IRequestHandler<AddGroceryToPurchaseCommand, Result<AddGroceryToPurchaseCommandResponse, CommandErrorValidation>>
 {
     private readonly IPurchaseRepository _repository;
 
@@ -20,12 +20,12 @@ public sealed class AddGroceryToPurchaseCommandHandler : ICommandHandler<AddGroc
         command.Validate();
 
         if (command.Errors.Count > 0)
-            return new Result<AddGroceryToPurchaseCommandResponse, CommandErrorValidation>(null, command.Errors);
+            return new Result<AddGroceryToPurchaseCommandResponse, CommandErrorValidation>(command.Errors);
 
         var purchase = await _repository.GetPurchaseById(command.PurchaseId);
         
         if(purchase is null)
-            return new Result<AddGroceryToPurchaseCommandResponse, CommandErrorValidation>(null, new List<CommandErrorValidation>
+            return new Result<AddGroceryToPurchaseCommandResponse, CommandErrorValidation>(new List<CommandErrorValidation>
             {
                 new(nameof(command.PurchaseId), "Compra não encontrada")
             });
@@ -33,7 +33,7 @@ public sealed class AddGroceryToPurchaseCommandHandler : ICommandHandler<AddGroc
         var grocery = new Domain.Entities.Grocery(command.Code, command.Name, command.Amount,
             command.Quantity, command.UnitType);
 
-        await _repository.AddGrocery(purchase.Id, grocery);
+        await _repository.AddGrocery(purchase.Id, grocery, cancellationToken);
 
         var response = new AddGroceryToPurchaseCommandResponse(purchase.Id, grocery.Id);
 

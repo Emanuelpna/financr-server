@@ -1,12 +1,12 @@
 using Financr.GroceriesShoppingContext.Application.Queries.Purchase;
-using Financr.GroceriesShoppingContext.Domain.Handlers;
 using Financr.GroceriesShoppingContext.Domain.Repositories;
 using Financr.GroceriesShoppingContext.Domain.Abstractions;
 using Financr.GroceriesShoppingContext.Domain.Validators;
+using MediatR;
 
 namespace Financr.GroceriesShoppingContext.Application.Handlers.Queries.Purchase;
 
-public sealed class GetPurchaseByIdQueryHandler : ICommandHandler<GetPurchaseByIdQuery, GetPurchaseByIdQueryResponse>
+public sealed class GetPurchaseByIdQueryHandler : IRequestHandler<GetPurchaseByIdQuery, Result<GetPurchaseByIdQueryResponse, CommandErrorValidation>>
 {
     private readonly IPurchaseRepository _repository;
 
@@ -20,12 +20,12 @@ public sealed class GetPurchaseByIdQueryHandler : ICommandHandler<GetPurchaseByI
         query.Validate();
 
         if (query.Errors.Count > 0)
-            return new Result<GetPurchaseByIdQueryResponse, CommandErrorValidation>(null, query.Errors);
+            return new Result<GetPurchaseByIdQueryResponse, CommandErrorValidation>(query.Errors);
 
-        var purchase = await _repository.GetPurchaseById(query.PurchaseId);
+        var purchase = await _repository.GetPurchaseById(query.PurchaseId, cancellationToken);
 
         if (purchase is null)
-            return new Result<GetPurchaseByIdQueryResponse, CommandErrorValidation>(null,
+            return new Result<GetPurchaseByIdQueryResponse, CommandErrorValidation>(
                 new List<CommandErrorValidation>
                 {
                     new(nameof(query.PurchaseId), "Compra não encontrada")
