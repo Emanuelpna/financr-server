@@ -1,10 +1,10 @@
-using Financr.GroceriesShoppingContext.Domain.Entities;
+using Financr.GroceriesShoppingContext.Domain.Abstractions;
 using Financr.GroceriesShoppingContext.Domain.Enums;
 using Financr.GroceriesShoppingContext.Domain.ValueObjects;
 
-namespace Financr.GroceriesShoppingContext.Domain.Aggregates.GroceryAggregate;
+namespace Financr.GroceriesShoppingContext.Domain.Entities;
 
-public class Grocery : Entity
+public class Grocery : Entity, IAggregateRoot
 {
     public Grocery(Guid id, string code, string name, decimal amount,  decimal quantity, EGroceryUnitType unitType)
     {

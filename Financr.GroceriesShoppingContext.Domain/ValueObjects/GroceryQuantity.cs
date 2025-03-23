@@ -1,8 +1,9 @@
+using Financr.GroceriesShoppingContext.Domain.Abstractions;
 using Financr.GroceriesShoppingContext.Domain.Enums;
 
 namespace Financr.GroceriesShoppingContext.Domain.ValueObjects;
 
-public class GroceryQuantity
+public record GroceryQuantity : ValueObject
 {
     public GroceryQuantity(EGroceryUnitType unitType, decimal quantity)
     {
@@ -22,6 +23,6 @@ public class GroceryQuantity
     /// <returns></returns>
     public decimal GetAmountByQuantityPerWholeUnit(decimal amount)
     {
-    return amount / Quantity;
+        return amount / Quantity;
     }
 }

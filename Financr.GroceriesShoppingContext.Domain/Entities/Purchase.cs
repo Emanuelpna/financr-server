@@ -1,4 +1,3 @@
-using Financr.GroceriesShoppingContext.Domain.Aggregates.GroceryAggregate;
 using Financr.GroceriesShoppingContext.Domain.Validators;
 
 namespace Financr.GroceriesShoppingContext.Domain.Entities;

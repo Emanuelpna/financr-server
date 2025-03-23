@@ -1,4 +1,3 @@
-using Financr.GroceriesShoppingContext.Domain.Aggregates.GroceryAggregate;
 using Financr.GroceriesShoppingContext.Domain.Entities;
 using Financr.GroceriesShoppingContext.Domain.Enums;
 
@@ -25,7 +24,7 @@ public class PurchaseTests
     }
     
     [Fact]
-    public void Test_ShouldNNotAddRepeatedGrocery()
+    public void Test_ShouldNotAddRepeatedGrocery()
     {
         const string supermaketName = "Supermarket Name";
         const string nfeKey = "f61e2395-b9f2-4035-aba0-8369b73d6b9c";
