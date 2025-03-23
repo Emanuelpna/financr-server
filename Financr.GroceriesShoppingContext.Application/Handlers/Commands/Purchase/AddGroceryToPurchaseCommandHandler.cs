@@ -30,7 +30,7 @@ public sealed class AddGroceryToPurchaseCommandHandler : ICommandHandler<AddGroc
                 new(nameof(command.PurchaseId), "Compra não encontrada")
             });
 
-        var grocery = new Domain.Aggregates.GroceryAggregate.Grocery(command.Code, command.Name, command.Amount,
+        var grocery = new Domain.Entities.Grocery(command.Code, command.Name, command.Amount,
             command.Quantity, command.UnitType);
 
         await _repository.AddGrocery(purchase.Id, grocery);

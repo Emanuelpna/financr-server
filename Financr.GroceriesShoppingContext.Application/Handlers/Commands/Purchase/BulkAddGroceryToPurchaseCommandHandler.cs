@@ -32,7 +32,7 @@ public sealed class BulkAddGroceryToPurchaseCommandHandler : ICommandHandler<Bul
 
         var groceries =  command.Groceries
             .Select(grocery =>
-                new Domain.Aggregates.GroceryAggregate.Grocery(
+                new Domain.Entities.Grocery(
                     grocery.Code, 
                     grocery.Name, 
                     grocery.Amount, 

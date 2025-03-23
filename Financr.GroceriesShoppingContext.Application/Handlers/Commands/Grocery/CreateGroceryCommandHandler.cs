@@ -22,7 +22,7 @@ public sealed class CreateGroceryCommandHandler : ICommandHandler<CreateGroceryC
         if (command.Errors.Count > 0)
             return new Result<CreateGroceryCommandResponse, CommandErrorValidation>(null, command.Errors);
 
-        var grocery = new Domain.Aggregates.GroceryAggregate.Grocery(command.Code, command.Name, command.Amount, command.Quantity, command.UnitType);
+        var grocery = new Domain.Entities.Grocery(command.Code, command.Name, command.Amount, command.Quantity, command.UnitType);
         
         await _repository.CreateGrocery(grocery);
         
