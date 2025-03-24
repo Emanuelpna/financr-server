@@ -54,7 +54,7 @@ public class Purchase : Entity, IValidator<DomainErrorValidation>
         Groceries.Add(grocery);
     }
 
-    public int SetGroceries(IList<Grocery> groceries)
+    public int SetGroceries(IEnumerable<Grocery> groceries)
     {
         var groceriesInitialCount = Groceries.Count;
         

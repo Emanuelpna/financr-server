@@ -33,5 +33,11 @@ public class Grocery : Entity, IAggregateRoot
 
     public string Name { get; private set; }
 
+    public Guid GroceryPriceId { get; private set; }
+    
     public GroceryPrice GroceryPrice { get; private set; }
+    
+    public Guid PurchaseId { get; private set; }
+    
+    public Purchase Purchase { get; private set; }
 }
